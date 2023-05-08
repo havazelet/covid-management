@@ -45,8 +45,14 @@ router.get('/:id', async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    if(Object.values(req.body).every(value => value !== '') && isValidIsraeliID(req.body.id) && isValidIsraeliMobile(req.body.mobile) 
-      && isValidIsraeliMobile(req.body.phoneNumber) && req.body.birthDate){
+    const existingCustomer = await customers.findOne({ id: req.body.id });
+    if (existingCustomer) {
+      console.log(`Customer with ID ${req.body.id} already exists`);
+      res.status(400).send('Customer already exists');
+      return;
+    }
+    if (Object.values(req.body).every(value => value !== '') && isValidIsraeliID(req.body.id) && isValidIsraeliMobile(req.body.mobile) 
+      && isValidIsraeliMobile(req.body.phoneNumber) && req.body.birthDate ){
       const newCustomer = await customers.create(req.body);
       console.log(`Created new customer with ID ${newCustomer.id}`);
       res.status(201).json(newCustomer);
