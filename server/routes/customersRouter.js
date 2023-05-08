@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const customers = require("../models/customers");
+const corona = require("../models/corona");
 const  mongoose  = require("mongoose");
 
 
@@ -84,7 +85,6 @@ const isValidIsraeliMobile = (mobile) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    console.log( req.body)
     const updatedCustomer = await customers
       .findOneAndUpdate({ id: req.params.id }, req.body, { new: true })
       .exec();
@@ -95,6 +95,31 @@ router.put("/:id", async (req, res) => {
     res
       .status(500)
       .send(`Server error: could not update customer with id ${req.params.id}`);
+  }
+});
+
+
+router.get("/customercorona/:id", async (req, res) => {
+  try {
+    if (req.params.id) {
+      const coronaById = await corona.find({ id: req.params.id }).exec();
+      const customerById = await customers.find({ id: req.params.id }).exec();
+      if (!customerById.length) {
+        console.log(`The customer with id ${req.params.id} was not found`);
+        return res
+          .status(404)
+          .send("The customer with the given ID was not found.");
+      }
+      res.send({...customerById[0].toObject(), ...coronaById[0].toObject()});
+    } else {
+      console.log(`The provided ID (${req.params.id}) is not valid`);
+      res.status(400).send("Invalid customer ID");
+    }
+  } catch (error) {
+    console.error(`Error finding customer by id ${req.params.id}: ${error}`);
+    res
+      .status(500)
+      .send(`Server error: could not retrieve customer with id ${req.params.id}`);
   }
 });
 

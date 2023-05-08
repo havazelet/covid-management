@@ -24,7 +24,7 @@ const Dashboard = () => {
     }, [customerAdded]);
 
     const navigateToCustomerDetails = (customer) => {
-        navigate(`/customer/${customer.id}`, {state: {customer}});
+        navigate(`/customer/${customer.id}`);
     }
 
     return (

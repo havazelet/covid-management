@@ -23,6 +23,7 @@ const ImageUpload = (props) => {
     utilsService.updateCustomerImage(`http://localhost:3001/api/customers/${props.customerId}`,{imageUrl: image}).then((res) => {
         if (res.status === 200) {
             setUploadMassage("Upload successfuly")
+            props.setImageUploaded(true);
         } else {
             setUploadMassage("Error with uploading customer image")
         }
