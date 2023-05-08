@@ -31,8 +31,8 @@ const LogIn = () => {
     };
 
     return (
-        <div className='mt-10'>
-            <div className='border px-4 py-12 bg-gray-50'>
+        <div className='mt-10 px-44'>
+            <div className='border px-28 py-12 bg-gray-50'>
                 <h1 className='text-3xl font-bold dark:text-white'>מערכת ניהול קורונה לקופת חולים</h1>
                 <h2 className='text-lg font-bold dark:text-white mt-3'>!ברוכים הבאים</h2>
                 <form className='mt-3'>
@@ -42,7 +42,7 @@ const LogIn = () => {
                     </label>
                     <label>
                         <div>:סיסמא</div>
-                        <input type="text" name="password" value={password} onChange={e => setPassword( e.target.value)} className="bg-gray-50 border border-gray-300"/>
+                        <input type="password" name="password" value={password} onChange={e => setPassword( e.target.value)} className="bg-gray-50 border border-gray-300"/>
                     </label>
                 </form>
                 {checkUserValid && logInSuccess === false && <div className='text-red-500'>שם משתמש או סיסמא אינם נכונים, בבקשה נסה שוב</div>}

@@ -3,6 +3,7 @@ import UtilsService from '../../UtilsService';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import NewCustomerModal from './NewCustomerModal';
+import CoronaGraph from './CoronaGraph';
 
 
 const Dashboard = () => {
@@ -32,7 +33,7 @@ const Dashboard = () => {
             <div className='mb-10 mt-10 '>             
                 <div className='mt-10 text-left flex w-full'>  
                     <div className='pl-2 w-min'>
-                        <button onClick={() => setShowGraph(!showGraph)} className="border border-gray-300 w-48">הצג גרף</button>
+                        <button onClick={() => setShowGraph(!showGraph)} className="border border-gray-300 w-48">הצג סטטיסטיקה</button>
                     </div>            
                     <div className='pl-2 w-min'>
                         <button onClick={() => setShowIframe(!showIframe)} className="border border-gray-300 w-48">יצירת בידוד קבוצתי</button>
@@ -42,8 +43,9 @@ const Dashboard = () => {
                     </div>
                     <div className='text-2xl text-right w-full' onClick={()=>navigate('/login')}>{state?.user.name}, יציאה</div>
                 </div>
-                {showIframe && <iframe className='w-full h-screen mt-6' src="http://localhost:3000/googleMap" title="google map"></iframe>}
-                {addCustomerModal &&  <NewCustomerModal setAddCustomerModal={setAddCustomerModal} setCustomerAdded={setCustomerAdded}/>}
+                { showIframe && <iframe className='w-full h-screen mt-6' src="http://localhost:3000/googleMap" title="google map"></iframe>}
+                { showGraph && <div className='pt-10'><CoronaGraph/></div>}
+                { addCustomerModal &&  <NewCustomerModal setAddCustomerModal={setAddCustomerModal} setCustomerAdded={setCustomerAdded}/>}
                 <div className='mt-16 text-right mx-40'>
                     <input type="text" placeholder="הכנס תעודת זהות" value={id} onChange={(e) => setId(e.target.value)} className="text-right bg-gray-50 border border-gray-300"/>
                 </div>         

@@ -6,6 +6,7 @@ const NewCustomerModal = (props) => {
     const [showDuplucateMassage, setShowDuplicateMessage] = useState(false);
     const [newCustomer, setNewCustomer] = useState({"id": "", "name": "", "address":"", "birthDate":"", "phoneNumber":"", "mobile":""});
     const utilsService = new UtilsService();
+    const today = new Date().toISOString().substr(0, 10);
 
     const addNewCustomer = async () => {
         try {
@@ -48,7 +49,7 @@ const NewCustomerModal = (props) => {
                                 </label>
                                 <label>
                                     <div>תאריך לידה</div>
-                                    <input type="date" value={newCustomer.birthDate} onChange={e => setNewCustomer({...newCustomer,"birthDate": e.target.value})} className="bg-gray-50 border border-gray-300"/>
+                                    <input type="date" max={today} value={newCustomer.birthDate} onChange={e => setNewCustomer({...newCustomer,"birthDate": e.target.value})} className="bg-gray-50 border border-gray-300"/>
                                 </label>
                                 <label>
                                     <div>טלפון</div>

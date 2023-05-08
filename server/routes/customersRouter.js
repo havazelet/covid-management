@@ -101,26 +101,41 @@ router.put("/:id", async (req, res) => {
 
 router.get("/customercorona/:id", async (req, res) => {
   try {
-    if (req.params.id) {
-      const coronaById = await corona.find({ id: req.params.id }).exec();
-      const customerById = await customers.find({ id: req.params.id }).exec();
-      if (!customerById.length) {
-        console.log(`The customer with id ${req.params.id} was not found`);
-        return res
-          .status(404)
-          .send("The customer with the given ID was not found.");
-      }
-      res.send({...customerById[0].toObject(), ...coronaById[0].toObject()});
+    const customerId = req.params.id;
+
+    if (!customerId) {
+      console.log(`The provided ID (${customerId}) is not valid`);
+      return res.status(400).send("Invalid customer ID");
+    }
+
+    const customer = await customers.findOne({ id: customerId }).exec();
+
+    if (!customer) {
+      console.log(`The customer with id ${customerId} was not found`);
+      return res.status(404).send("The customer with the given ID was not found.");
+    }
+
+    const customerDetails = customer.toObject();
+    const date = new Date(customer.birthDate);
+    customerDetails.birthDate = date.toLocaleDateString('en-GB');
+
+    const coronaDetails = await corona.findOne({ id: customerId }).exec();
+
+    if (coronaDetails) {
+      const coronaDetailsObj = coronaDetails.toObject();
+      const getSicknessDate = new Date(coronaDetailsObj.sicknessPeriod.getSickness);
+      const recoveryDateFormated = new Date(coronaDetailsObj.sicknessPeriod.recoveryDate);
+      coronaDetailsObj.sicknessPeriod.getSickness = getSicknessDate.toLocaleDateString('en-GB');
+      coronaDetailsObj.sicknessPeriod.recoveryDate = recoveryDateFormated.toLocaleDateString('en-GB');
+      res.send({ ...customerDetails, ...coronaDetailsObj });
     } else {
-      console.log(`The provided ID (${req.params.id}) is not valid`);
-      res.status(400).send("Invalid customer ID");
+      res.send(customerDetails);
     }
   } catch (error) {
     console.error(`Error finding customer by id ${req.params.id}: ${error}`);
-    res
-      .status(500)
-      .send(`Server error: could not retrieve customer with id ${req.params.id}`);
+    res.status(500).send(`Server error: could not retrieve customer with id ${req.params.id}`);
   }
 });
+
 
 module.exports = router;
