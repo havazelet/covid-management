@@ -21,4 +21,8 @@ export default class UtilsService {
     getUserbyUserName(url, payload) {
         return axios.get(url, payload).then(res => res);
     }
+
+    updateCustomerImage(url, payload) {
+        return axios.put(url, payload).then(res => res);
+    }
 }

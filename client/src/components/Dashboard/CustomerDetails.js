@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import UtilsService from '../../UtilsService';
+import ImageUpload from './ImageUpload';
 
 
 const CustomerDetails = () => {
@@ -27,10 +28,11 @@ const CustomerDetails = () => {
 
     
     return (
-        <div>
+        <div className='mb-20'>
             <div className='bg-blue-100'>
                 <h1 className='mt-10 mb-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white'> פרטי מטופל {state.customer.name}</h1>
            </div>
+           <div className='text-right'> {state.customer.imageUrl && <img style={{width: "100px", height: "100%"}} src={state.customer.imageUrl} alt="Uploade" />} </div>
            <div className='text-right'>
             <table className='text-right w-full mt-14 text-2xl'>
                 <tbody className='text-right'>
@@ -59,7 +61,7 @@ const CustomerDetails = () => {
                         <td>טלפון נייד</td>
                     </tr>
                     <tr>                  
-                        <td>{customerCoronaDetails.vaccinationDate?.map(i=><div>{i}</div>)}</td>
+                        <td>{customerCoronaDetails.vaccinationDate?.map((date,index)=><div key={date+index}>{date}</div>)}</td>
                         <td>מועדי קבלת חיסון קורונה</td>
                     </tr>
                     <tr>                  
@@ -75,9 +77,9 @@ const CustomerDetails = () => {
                         <td>מועד החלמה מהמחלה</td>
                     </tr>
                 </tbody>
-
             </table>
            </div>
+           <div><ImageUpload customerId={state.customer.id}/></div>
         </div>
     );
 }

@@ -76,4 +76,20 @@ const isValidIsraeliMobile = (mobile) => {
   return regex.test(mobile);
 }
 
+router.put("/:id", async (req, res) => {
+  try {
+    console.log( req.body)
+    const updatedCustomer = await customers
+      .findOneAndUpdate({ id: req.params.id }, req.body, { new: true })
+      .exec();
+    console.log(`The customer ${updatedCustomer} was updated`);
+    res.json(updatedCustomer);
+  } catch (error) {
+    console.error(`Error updating customer with id ${req.params.id}: ${error}`);
+    res
+      .status(500)
+      .send(`Server error: could not update customer with id ${req.params.id}`);
+  }
+});
+
 module.exports = router;

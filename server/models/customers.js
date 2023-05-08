@@ -20,6 +20,9 @@ const customersSchema = mongoose.Schema({
   },
   mobile:{
     type: String,
+  },
+  imageUrl: {
+    type: String,
   }
 });
 module.exports = mongoose.model("Customer", customersSchema );
