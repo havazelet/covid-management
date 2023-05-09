@@ -35,9 +35,9 @@ const Dashboard = () => {
                     <div className='pl-2 w-min'>
                         <button onClick={() => setShowGraph(!showGraph)} className="border border-gray-300 w-48">הצג סטטיסטיקה</button>
                     </div>            
-                    <div className='pl-2 w-min'>
+                    {/* <div className='pl-2 w-min'>
                         <button onClick={() => setShowIframe(!showIframe)} className="border border-gray-300 w-48">יצירת בידוד קבוצתי</button>
-                    </div>                   
+                    </div>                    */}
                     <div className='pl-2'>
                         <button onClick={() => setAddCustomerModal(true)} className="border border-gray-300 w-48">הכנס לקוח</button>
                     </div>
