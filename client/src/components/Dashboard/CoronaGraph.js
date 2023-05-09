@@ -39,7 +39,7 @@ const CoronaGraph = (props) => {
 
     return (
         <div className='flex bg-gray-50'>
-            <div className='text-4xl border bg-green-300  my-4 mx-4 pt-10 px-4'>מספר לקוחות שאינם מחוסנים הינו {sumOfNotVaccinatedCustomers()} מתוך {props.customersSum} כלל המטופלים</div>
+            <div className='text-4xl border bg-green-300  my-4 mx-4 pt-10 px-4'>מספר הלקוחות שאינם מחוסנים הינו {sumOfNotVaccinatedCustomers()} מתוך {props.customersSum} כלל המטופלים</div>
             <div>
                 <BarChart width={730} height={250} data={formattedData} margin={{top: 20, right: 20, bottom: 20, left: 20}} >
                     <XAxis dataKey="day" />

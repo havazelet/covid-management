@@ -1,0 +1,25 @@
+{
+  "name": "covid-management",
+  "version": "1.0.0",
+  "description": "Covid-19 system management for a Health Fund",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
+    "start-client": "cd client && npm start",
+    "start-server": "cd server && nodemon start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/havazelet/covid-management.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/havazelet/covid-management/issues"
+  },
+  "homepage": "https://github.com/havazelet/covid-management#readme",
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}

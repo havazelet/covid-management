@@ -27,18 +27,16 @@ cd server
 
 npm install
 
-Open a new terminal window and navigate to the client directory
-
-cd client
+cd ../client
 
 npm install
 
 
 ## Usage
 
-To start the application, run the following command:
+To start the application, run the following command under covid-management folder:
 
-npm start in cliend and npm start in server side
+npm start
 
 The application will be available at http://localhost:3000.
 
