@@ -44,7 +44,7 @@ const Dashboard = () => {
                     <div className='text-2xl text-right w-full' onClick={()=>navigate('/login')}>{state?.user.name}, יציאה</div>
                 </div>
                 { showIframe && <iframe className='w-full h-screen mt-6' src="http://localhost:3000/googleMap" title="google map"></iframe>}
-                { showGraph && <div className='pt-10'><CoronaGraph/></div>}
+                { showGraph && <div className='pt-10'><CoronaGraph customersSum={customers.length}/></div>}
                 { addCustomerModal &&  <NewCustomerModal setAddCustomerModal={setAddCustomerModal} setCustomerAdded={setCustomerAdded}/>}
                 <div className='mt-16 text-right mx-40'>
                     <input type="text" placeholder="הכנס תעודת זהות" value={id} onChange={(e) => setId(e.target.value)} className="text-right bg-gray-50 border border-gray-300"/>
