@@ -52,8 +52,9 @@ router.post("/", async (req, res) => {
       res.status(400).send('Customer already exists');
       return;
     }
+    
     if (Object.values(req.body).every(value => value !== '') && isValidIsraeliID(req.body.id) && isValidIsraeliMobile(req.body.mobile) 
-      && isValidIsraeliMobile(req.body.phoneNumber) && req.body.birthDate ){
+      && isValidIsraeliMobile(req.body.phoneNumber) && isValidBirthdate(req.body.birthDate)){
       const newCustomer = await customers.create(req.body);
       console.log(`Created new customer with ID ${newCustomer.id}`);
       res.status(201).json(newCustomer);
@@ -81,6 +82,11 @@ const isValidIsraeliID = (id) => {
 const isValidIsraeliMobile = (mobile) => {
   const regex = /^(\+972|0)([23489]|5[0248]|77)[1-9]\d{6}$/;
   return regex.test(mobile);
+}
+
+const isValidBirthdate = (birthdate) => {
+  const date = new Date(birthdate);
+  return date.getTime() < new Date().getTime() && date.getFullYear() > 1900;
 }
 
 router.put("/:id", async (req, res) => {
