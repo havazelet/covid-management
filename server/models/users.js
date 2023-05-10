@@ -1,13 +1,14 @@
 "use strict";
-const { ObjectId } = require("mongoose");
 const mongoose = require("mongoose");
-const { ObjectID, Array } = require("mongoose/lib/schema/index");
-const customersSchema = mongoose.Schema({
-  nameName: {
-    type: String,
+const usersSchema = mongoose.Schema({
+  userName: {
+    type: String, required: true, unique: true  
   },
   password:{
-    type: String,
-  }
+    type: String, required: true 
+  },
+  name: {
+    type: String, required: true 
+  },
 });
-module.exports = mongoose.model("User", customersSchema );
+module.exports = mongoose.model("User", usersSchema );

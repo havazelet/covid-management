@@ -1,7 +1,5 @@
 "use strict";
-const { ObjectId } = require("mongoose");
 const mongoose = require("mongoose");
-const { ObjectID, Array } = require("mongoose/lib/schema/index");
 const CoronaSchema = mongoose.Schema({
   id:{
     type: String,
@@ -11,7 +9,12 @@ const CoronaSchema = mongoose.Schema({
     type: String,
   },
   sicknessPeriod:{
-    type: Object
+    getSickness: {
+      type: Date
+    },
+    recoveryDate: {
+      type: Date
+    }
   }
 }, {collection: "corona"});
 module.exports = mongoose.model("Corona", CoronaSchema );

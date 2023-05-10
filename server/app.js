@@ -38,11 +38,9 @@ app.use("/api/corona", coronaRouter);
 
 
 // Connect to the MongoDB database
-mongoose.connect("", {
+mongoose.connect("mongodb://127.0.0.1:27017/covid19", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  //useFindAndModify: false,
-  //useCreateIndex: true,
 }).then(() => {
   console.log("Connected to DB covid19!");
 }).catch((err) => {

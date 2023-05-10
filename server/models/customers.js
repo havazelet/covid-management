@@ -1,19 +1,17 @@
 "use strict";
-const { ObjectId } = require("mongoose");
 const mongoose = require("mongoose");
-const { ObjectID, Array } = require("mongoose/lib/schema/index");
 const customersSchema = mongoose.Schema({
   name: {
-    type: String,
+    type: String, required: true
   },
   id:{
-    type: String,
+    type: String, required: true, unique: true 
   },
   address:{
     type: String,
   },
   birthDate:{
-    type: Date,
+    type: Date, required: true
   },
   phoneNumber:{
     type: String,
