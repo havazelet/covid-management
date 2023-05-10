@@ -33,11 +33,19 @@ To install the application, clone the repository and install the necessary depen
 
 git clone https://github.com/havazelet/covid-management.git
 
+cd covid-management
+
+npm install
+
+cd client
+
+npm install
+
+cd ../server
+
+npm install
+
 node createCovid19DB.js
-
-npm install client
-
-npm install server
 
 The installation create default login user with the credential "username":"password"
 
