@@ -1,15 +1,15 @@
 import React, { useState , useEffect } from 'react';
 import UtilsService from '../../UtilsService';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Legend, Bar } from 'recharts';
+import { XAxis, YAxis, Tooltip, BarChart, Bar } from 'recharts';
 import { format, subMonths, eachDayOfInterval } from 'date-fns';
 
 const today = new Date();
 const lastMonth = subMonths(today, 1);
 const allDaysOfLastMonth = eachDayOfInterval({ start: lastMonth, end: today });
+const utilsService = new UtilsService();
 
 const CoronaGraph = (props) => {
     const [coronaDetails, setCoronaDetails] = useState([]);
-    const utilsService = new UtilsService();
     
     useEffect(() => {      
         utilsService.getItems("http://localhost:3001/api/corona").then(res => setCoronaDetails(res));

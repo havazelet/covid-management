@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import UtilsService from '../../UtilsService';
 import ImageUpload from './ImageUpload';
 
 
 const CustomerDetails = () => {
-    //const { state } = useLocation();
+    // const { state } = useLocation();
     const urlPrm = useParams().id;
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [customerCoronaDetails, setCustomerCoronaDetails] = useState(null);
     const [ImageUploaded, setImageUploaded] = useState(false);
 
