@@ -12,8 +12,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 // Use the JSON middleware to parse incoming requests with JSON payloads
-app.use(express.json());
-
+app.use(express.json({ limit: '5mb' }));
 
 // Set headers for CORS requests
 app.use((req, res, next) => {
@@ -25,6 +24,15 @@ app.use((req, res, next) => {
     return res.status(200).json({});
   }
   next();
+});
+
+
+app.use((err, req, res, next) => {
+  if (err.status === 413) {
+    res.status(413).json({ error: 'Payload too large' });
+  } else {
+    next(err);
+  }
 });
 
 

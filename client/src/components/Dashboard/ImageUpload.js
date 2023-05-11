@@ -3,7 +3,8 @@ import UtilsService from '../../UtilsService';
 
 const ImageUpload = (props) => {
   const [image, setImage] = useState(null);
-  const [UploadMassage, setUploadMassage] = useState("");
+  const [UploadMassage, setUploadMassage] = useState('');
+  const [isUploaded, setIsUploaded] = useState(false);
 
   const utilsService = new UtilsService();
 
@@ -25,18 +26,23 @@ const ImageUpload = (props) => {
     if (image) {
       try {
           await utilsService.updateCustomerImage(`http://localhost:3001/api/customers/${props.customerId}`, {image: image}).then((res) => {
-          if (res.status === 200) {
-            setUploadMassage("Upload successfully");
-            props.setImageUploaded(true);
-          } else {
-            setUploadMassage("Error with uploading customer image");
-          } 
+          setUploadMassage("Upload successfully");
+          setIsUploaded(true);
+          props.setImageUploaded(!props.ImageUploaded);
         }); 
       } catch (error) {
-        setUploadMassage("Error with uploading customer image");
+        setIsUploaded(false);
+        if (error.request.response === "Invalid input") {
+          setUploadMassage("Invalid input");
+        } else if (error.response.status === 413) {
+          setUploadMassage("Too large file");
+        } else {
+          setUploadMassage("Error with uploading customer image");
+        }    
       } 
     } else {
-        setUploadMassage("Error with uploading customer image");
+        setIsUploaded(false);
+        setUploadMassage("Image not found");
     }
   };
 
@@ -46,7 +52,7 @@ const ImageUpload = (props) => {
             <input type="file" onChange={handleImageChange} className='w-64 ml-1'/>
             <button type="submit" className='border border bg-sky-900 border-gray-300 w-48'>Upload</button>
         </form>
-        <div className='text-right'>{UploadMassage}</div>
+        <div className={`text-right ${isUploaded ? 'text-green-500' : 'text-red-500'}`}>{UploadMassage}</div>
     </div>
   );
 }

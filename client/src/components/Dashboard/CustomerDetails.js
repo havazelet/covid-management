@@ -76,7 +76,7 @@ const CustomerDetails = () => {
                     </tbody>
                 </table>
             </div>
-            <div className='mr-10'><ImageUpload customerId={customerCoronaDetails.id} setImageUploaded={setImageUploaded}/></div>
+            <div className='mr-10'><ImageUpload customerId={customerCoronaDetails.id} setImageUploaded={setImageUploaded} ImageUploaded={ImageUploaded}/></div>
             </div>
         </div>
     );
