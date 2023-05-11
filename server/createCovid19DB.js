@@ -30,9 +30,12 @@ const newCorona = new Corona({
     sicknessPeriod: { getSickness: "05/01/2023", recoveryDate: "05/15/2023" }
 });
 
-User.findOne({ userName: 'username' })
+Promise.all([
+    User.findOne({ userName: 'username' }), 
+    Corona.findOne({ id: '100000009' }),
+    Customer.findOne({ id: '100000009' })])
     .then(user => {
-        if (user) {
+        if (user.some((item) => item)) {
             console.log('Username already exists in collection');
             mongoose.disconnect();
             return;

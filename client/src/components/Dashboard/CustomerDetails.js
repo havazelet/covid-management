@@ -62,7 +62,7 @@ const CustomerDetails = () => {
                             <td>מועדי קבלת חיסון קורונה</td>
                         </tr>
                         <tr className='border-b border-gray-150'>                  
-                            <td>{customerCoronaDetails?.vaccinationDateMaker}</td>
+                            <td>{customerCoronaDetails?.vaccinationMaker}</td>
                             <td>יצרן החיסון</td>
                         </tr>
                         <tr className='border-b border-gray-150'>                  
