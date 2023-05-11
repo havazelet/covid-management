@@ -19,7 +19,7 @@ const customersSchema = mongoose.Schema({
   mobile:{
     type: String,
   },
-  imageUrl: {
+  image: {
     type: String,
   }
 });

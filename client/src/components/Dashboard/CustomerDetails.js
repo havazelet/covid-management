@@ -29,7 +29,7 @@ const CustomerDetails = () => {
                 <div className='bg-blue-100'>
                     <h1 className='mt-10 mb-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white py-4'> פרטי מטופל {customerCoronaDetails?.name}</h1>
                 </div>
-            <div className='text-right flex flex-row-reverse mr-14 mt-4'> {customerCoronaDetails?.imageUrl && <img style={{width: "100px", height: "100%"}} src={customerCoronaDetails?.imageUrl} alt="Uploade" />} </div>
+            <div className='text-right flex flex-row-reverse mr-14 mt-4'> {customerCoronaDetails?.image && <img style={{width: "100px", height: "100%"}} src={customerCoronaDetails?.image} alt="Upload" />} </div>
             <div className='text-right mr-10 flex flex-row-reverse'>
                 <table className='text-right w-10/12 mt-14 text-2xl'>
                     <tbody className='text-right'>

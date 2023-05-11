@@ -89,8 +89,26 @@ const isValidBirthdate = (birthdate) => {
   return date.getTime() < new Date().getTime() && date.getFullYear() > 1900;
 }
 
+function isBase64Image(file) {
+  if (typeof file !== 'string') {
+    return false;
+  }
+  if (!file.startsWith('data:image/')) {
+    return false;
+  }
+  const mimeType = file.split(';')[0].split(':')[1];
+  if (!/^image\//.test(mimeType)) {
+    return false;
+  }
+  return true;
+}
+
+
 router.put("/:id", async (req, res) => {
   try {
+    if ( !(req.body) || (req.body?.image && !isBase64Image(req.body.image))) {
+      return res.status(400).send("Invalid input");
+    }
     const updatedCustomer = await customers
       .findOneAndUpdate({ id: req.params.id }, req.body, { new: true })
       .exec();

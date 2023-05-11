@@ -10,7 +10,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/covid19", {
 
 const newUser = new User({
     name: 'שלום שלום',
-    userName: 'userName',
+    userName: 'username',
     password: 'password',
 });
 
@@ -19,7 +19,7 @@ const newCustomer = new Customer({
     id: "100000009",
     address: "מכביה 3, אילת",
     birthDate: "01/01/1999",
-    numberPhone: "087747877",
+    phoneNumber: "087747877",
     mobile: "0874787478"
 });
 
@@ -30,7 +30,7 @@ const newCorona = new Corona({
     sicknessPeriod: { getSickness: "05/01/2023", recoveryDate: "05/15/2023" }
 });
 
-User.findOne({ userName: 'userName' })
+User.findOne({ userName: 'username' })
     .then(user => {
         if (user) {
             console.log('Username already exists in collection');
